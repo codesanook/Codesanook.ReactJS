@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\..\..\packages\JavaScriptEngineSwitcher.V8.Native.win-x86.3.1.5\build\JavaScriptEngineSwitcher.V8.Native.win-x86.props" Condition="Exists('..\..\..\packages\JavaScriptEngineSwitcher.V8.Native.win-x86.3.1.5\build\JavaScriptEngineSwitcher.V8.Native.win-x86.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -26,6 +27,8 @@
     <IISExpressUseClassicPipelineMode />
     <Use64BitIISExpress />
     <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -51,6 +54,24 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AdvancedStringBuilder, Version=0.1.0.0, Culture=neutral, PublicKeyToken=e818a2fc08933ddb, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\AdvancedStringBuilder.0.1.0\lib\net45\AdvancedStringBuilder.dll</HintPath>
+    </Reference>
+    <Reference Include="Autofac, Version=3.5.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Autofac.3.5.2\lib\net40\Autofac.dll</HintPath>
+    </Reference>
+    <Reference Include="ClearScript, Version=5.6.0.0, Culture=neutral, PublicKeyToken=935d0c957da47c73, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\JavaScriptEngineSwitcher.V8.3.1.6\lib\net45\ClearScript.dll</HintPath>
+    </Reference>
+    <Reference Include="JavaScriptEngineSwitcher.Core, Version=3.1.0.0, Culture=neutral, PublicKeyToken=c608b2a8cc9e4472, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\JavaScriptEngineSwitcher.Core.3.1.0\lib\net45\JavaScriptEngineSwitcher.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="JavaScriptEngineSwitcher.V8, Version=3.1.6.0, Culture=neutral, PublicKeyToken=c608b2a8cc9e4472, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\JavaScriptEngineSwitcher.V8.3.1.6\lib\net45\JavaScriptEngineSwitcher.V8.dll</HintPath>
+    </Reference>
+    <Reference Include="JSPool, Version=4.0.0.0, Culture=neutral, PublicKeyToken=2fc7775f73072640, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\JSPool.4.0.0\lib\net45\JSPool.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=2.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\..\..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
       <Private>True</Private>
@@ -60,11 +81,22 @@
       <HintPath>..\..\..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="React.Core, Version=5.0.0.0, Culture=neutral, PublicKeyToken=9aed67b161f7db78, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\React.Core.5.0.0\lib\net45\React.Core.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.Caching" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.Web.DynamicData" />
@@ -73,6 +105,9 @@
     <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\..\..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
       <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Http, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Microsoft.AspNet.WebApi.Core.5.2.3\lib\net45\System.Web.Http.dll</HintPath>
     </Reference>
     <Reference Include="System.Web.Mvc, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\..\..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
@@ -98,13 +133,20 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ActionHtmlString.cs" />
+    <Compile Include="AspNetCache.cs" />
+    <Compile Include="AspNetFileSystem.cs" />
+    <Compile Include="ComponentModule.cs" />
+    <Compile Include="HtmlHelperExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ResourceManifest.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
+    <Content Include="Scripts\react-dom.development.js" />
+    <Content Include="Scripts\react.development.js" />
     <Content Include="Web.config" />
     <Content Include="Scripts\Web.config" />
-    <Content Include="Styles\Web.config" />
     <Content Include="Module.txt" />
   </ItemGroup>
   <ItemGroup>
@@ -120,9 +162,13 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Controllers\" />
-    <Folder Include="Models\" />
-    <Folder Include="Views\" />
+    <Content Include=".babelrc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Copy-V8.ps1" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="README.md" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -152,4 +198,18 @@
       </FlavorProperties>
     </VisualStudio>
   </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\..\..\packages\JavaScriptEngineSwitcher.V8.Native.win-x86.3.1.5\build\JavaScriptEngineSwitcher.V8.Native.win-x86.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\..\packages\JavaScriptEngineSwitcher.V8.Native.win-x86.3.1.5\build\JavaScriptEngineSwitcher.V8.Native.win-x86.props'))" />
+  </Target>
+  <PropertyGroup>
+    <PostBuildEvent>PowerShell.EXE -File  $(ProjectDir)Copy-V8.ps1 -SolutionDir $(SolutionDir) -TargetDir $(TargetDir)
+</PostBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PreBuildEvent>
+    </PreBuildEvent>
+  </PropertyGroup>
 </Project>
