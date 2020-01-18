@@ -2,12 +2,15 @@
     [Parameter(Mandatory = $true)] [string] $SolutionDir,
     [Parameter(Mandatory = $true)] [string] $TargetDir
 )
+"SolutionDir $SolutionDir"
+"TargetDir $TargetDir"
 
 # https://github.com/projectkudu/kudu/issues/2048
 $WarningPreference = "SilentlyContinue"
 
-$destination = Join-Path -Path $SolutionDir -ChildPath "Orchard.Web/bin/x86"
-New-Item -ItemType Directory $destination -Force -ErrorAction SilentlyContinue | Out-Null
+$destinationDir = Join-Path -Path $SolutionDir -ChildPath "Orchard.Web/bin/x86"
+"destinationDir $destinationDir"
+New-Item -ItemType Directory $destinationDir -Force -ErrorAction SilentlyContinue | Out-Null
 
-$files = Get-ChildItem -Path $TargetDir -Recurse | Where-Object { $_.FullName -Match 'x86.*v8' } 
-$files | Copy-Item -Destination $destination -Force -Verbose
+$files = Get-ChildItem -Path $TargetDir -Recurse | Where-Object { $_.FullName -Match "x86.*v8" } 
+$files | Copy-Item -Destination $destinationDir -Force -Verbose
