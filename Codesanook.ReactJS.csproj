@@ -13,7 +13,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Codesanook.ReactJS</RootNamespace>
     <AssemblyName>Codesanook.ReactJS</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
@@ -209,7 +209,7 @@
     </PreBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
-      <WebBinDir>..\..\..\bin</WebBinDir>
+    <WebBinDir>..\..\..\bin</WebBinDir>
     <PostBuildEvent>PowerShell.EXE -File $(ProjectDir)Copy-V8.ps1 -TargetDir $(TargetDir) -WebBinDir $(WebBinDir)</PostBuildEvent>
   </PropertyGroup>
 </Project>
