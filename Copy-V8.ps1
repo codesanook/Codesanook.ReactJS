@@ -3,18 +3,17 @@
     [Parameter(Mandatory = $true)] [string] $WebBinDir
 )
 
-$ErrorActionPreference = "Continue"
-$VerbosePreference = "Continue"
+"Executing Copy-V8.ps1 script"
+
+# Fix PowerShell script not working in web job https://github.com/projectkudu/kudu/issues/2048
 $WarningPreference = "Continue"
-$ProgressPreference = "SilentlyContinue"
+#$ErrorActionPreference = "Continue"
+#$VerbosePreference = "Continue"
+#$ProgressPreference = "SilentlyContinue"
 
 "Current dir $PSScriptRoot"
 "TargetDir $TargetDir"
 "WebBinDir $WebBinDir"
-
-return
-
-# https://github.com/projectkudu/kudu/issues/2048
 
 $destinationDir = Join-Path -Path "$WebBinDir" -ChildPath "x86"
 "Creating $destinationDir directory if not exit"
