@@ -210,6 +210,6 @@
   </PropertyGroup>
   <PropertyGroup>
     <WebBinDir>..\..\..\bin</WebBinDir>
-    <PostBuildEvent>PowerShell.EXE -File $(ProjectDir)Copy-V8.ps1 -TargetDir $(TargetDir) -WebBinDir $(WebBinDir)</PostBuildEvent>
+    <PostBuildEvent>PowerShell.EXE -ExecutionPolicy ByPass -File $(ProjectDir)Copy-V8.ps1 -TargetDir $(TargetDir) -WebBinDir $(WebBinDir)</PostBuildEvent>
   </PropertyGroup>
 </Project>
