@@ -165,9 +165,6 @@
     <Content Include=".babelrc" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Copy-V8.ps1" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="README.md" />
   </ItemGroup>
   <PropertyGroup>
@@ -177,9 +174,6 @@
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
-  <Target Name="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
-    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(ProjectDir)" />
-  </Target>
   <ProjectExtensions>
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
@@ -209,7 +203,29 @@
     </PreBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
-    <WebBinDir>..\..\..\bin</WebBinDir>
-    <PostBuildEvent>PowerShell.EXE -ExecutionPolicy ByPass -File $(ProjectDir)Copy-V8.ps1 -TargetDir $(TargetDir) -WebBinDir $(WebBinDir)</PostBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
   </PropertyGroup>
+  <Target Name="BeforeBuild">
+    <!-- 
+      The target "Precompiled" defined in Orchard.proj at root level is depended on "Build" target 
+      so it is safe to alter item group in "BeforeBuild" target.
+    -->
+    <ItemGroup>
+      <!-- We define V8NativeFiles items and remove None items because we want to control how to copy V8 native. -->
+      <V8NativeFiles Include="@(None)" Condition="$([System.String]::new('%(FullPath)').Contains('JavaScriptEngineSwitcher.V8.Native'))" />
+      <None Remove="@(None)" Condition="$([System.String]::new('%(FullPath)').Contains('JavaScriptEngineSwitcher.V8.Native'))" />
+    </ItemGroup>
+  </Target>
+  <Target Name="CopyV8Native" AfterTargets="Build" Condition="'$(NotCopyV8Native)' == ''">
+    <!-- We don't supply PreCompiledDir property when we build on local machine with Visual Studio -->
+    <PropertyGroup Condition="'$(PreCompiledDir)' == ''">
+      <V8NativeTargetDir>$(MSBuildThisFileDirectory)..\..\..\Orchard.Web\bin\x86\</V8NativeTargetDir>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(PreCompiledDir)' != ''">
+      <V8NativeTargetDir>$([System.IO.Path]::Combine('$(PreCompiledDir)', 'bin\x86\'))</V8NativeTargetDir>
+    </PropertyGroup>
+    <Message Importance="High" Text="Copying V8 native @(V8NativeFiles->Count()) files: @(V8NativeFiles->'%(FullPath)')" />
+    <Copy SourceFiles="@(V8NativeFiles)" DestinationFolder="$(V8NativeTargetDir)" Condition="!Exists('$(V8NativeTargetDir)%(Filename)%(Extension)')" />
+  </Target>
 </Project>
