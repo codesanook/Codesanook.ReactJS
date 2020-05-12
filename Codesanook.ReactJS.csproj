@@ -220,12 +220,13 @@
   <Target Name="CopyV8Native" AfterTargets="Build" Condition="'$(NotCopyV8Native)' == ''">
     <!-- We don't supply PreCompiledDir property when we build on local machine with Visual Studio -->
     <PropertyGroup Condition="'$(PreCompiledDir)' == ''">
-      <V8NativeTargetDir>$(MSBuildThisFileDirectory)..\..\..\Orchard.Web\bin\x86\</V8NativeTargetDir>
+      <V8NativeTargetDir>$([System.IO.Path]::Combine($(MSBuildThisFileDirectory), '..\..\..\Orchard.Web\bin\x86\'))</V8NativeTargetDir>
     </PropertyGroup>
     <PropertyGroup Condition="'$(PreCompiledDir)' != ''">
-      <V8NativeTargetDir>$([System.IO.Path]::Combine('$(PreCompiledDir)', 'bin\x86\'))</V8NativeTargetDir>
+      <V8NativeTargetDir>$([System.IO.Path]::Combine($(PreCompiledDir), 'bin\x86\'))</V8NativeTargetDir>
     </PropertyGroup>
-    <Message Importance="High" Text="Copying V8 native @(V8NativeFiles->Count()) files: @(V8NativeFiles->'%(FullPath)')" />
+    <Message Importance="High" 
+        Text="Copying V8 native @(V8NativeFiles->Count()) files: @(V8NativeFiles->'%(FullPath)') to '$([System.IO.Path]::GetFullPath($(V8NativeTargetDir)))'" />
     <Copy SourceFiles="@(V8NativeFiles)" DestinationFolder="$(V8NativeTargetDir)" Condition="!Exists('$(V8NativeTargetDir)%(Filename)%(Extension)')" />
   </Target>
 </Project>
