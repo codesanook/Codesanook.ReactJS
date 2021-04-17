@@ -216,7 +216,7 @@
       <V8NativeFiles Include="@(None)" Condition="$([System.String]::new('%(FullPath)').Contains('JavaScriptEngineSwitcher.V8.Native'))" />
       <None Remove="@(None)" Condition="$([System.String]::new('%(FullPath)').Contains('JavaScriptEngineSwitcher.V8.Native'))" />
     </ItemGroup>
-</Target>
+  </Target>
   <Target Name="CopyV8Native" AfterTargets="Build">
     <!-- We don't supply PreCompiledDir property when we build on local machine with Visual Studio -->
     <PropertyGroup Condition="'$(PreCompiledDir)' == ''">
