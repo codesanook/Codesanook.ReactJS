@@ -222,9 +222,12 @@
     <PropertyGroup Condition="'$(PreCompiledDir)' == ''">
       <V8NativeTargetDir>$([System.IO.Path]::Combine($(MSBuildThisFileDirectory), '..\..\..\Orchard.Web\bin\x86\'))</V8NativeTargetDir>
     </PropertyGroup>
-    <!-- When we deploy with Kudu, we have PreCompiledDir property. Use it's value as target folder -->
+    <!-- 
+        When we deploy for productino, we have PreCompiledDir property. Use it's value as a target folder 
+        !!! Do not rely on a current working directory because it change to the current project file
+    -->
     <PropertyGroup Condition="'$(PreCompiledDir)' != ''">
-      <V8NativeTargetDir>$([System.IO.Path]::Combine($(PreCompiledDir), 'bin\x86\'))</V8NativeTargetDir>
+      <V8NativeTargetDir>$([System.IO.Path]::Combine($(MSBuildStartupDirectory), $(PreCompiledDir), 'bin\x86\'))</V8NativeTargetDir>
     </PropertyGroup>
     <Message Importance="High" Text="Copying V8 native @(V8NativeFiles-&gt;Count()) files: @(V8NativeFiles->'%(FullPath)') to '$([System.IO.Path]::GetFullPath($(V8NativeTargetDir)))'" />
     <Copy SourceFiles="@(V8NativeFiles)" DestinationFolder="$(V8NativeTargetDir)" Condition="!Exists('$(V8NativeTargetDir)%(Filename)%(Extension)')" />
